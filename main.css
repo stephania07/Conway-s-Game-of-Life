@@ -1,0 +1,30 @@
+ td {
+  padding: 1em;
+  font-size: 150%;
+}
+
+td.alive {
+  background-color: green;
+}
+
+td.dead {
+  background-color: #ccc;
+}
+
+/*style for my project*/
+/*tr td {
+height: 3em;
+width: 3em;
+border: solid 4px #919100;
+
+}
+
+h2 {
+text-decoration: underline;
+text-align: center;
+}
+
+#menu {
+margin-left: 33em;
+}
+ */
