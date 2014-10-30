@@ -1,7 +1,19 @@
 document.addEventListener('DOMContentLoaded', function(){
-  var matrix = [[0, 1, 0], [0, 1, 1], [0, 1, 1]];
-  generateGrid(matrix);
+  //var matrix = [[0, 1, 0, 1, 1], [0, 1, 1, 0, 1], [0, 1, 1, 0, 0], [0, 0, 1, 1, 0], [0, 1, 1, 1, 0]];
+ var matrix= matrixCreator(5, 5);
+ generateGrid(matrix);
 
+ function matrixCreator(x,y){
+   var matrix = [];
+	 for(var i =0; i < x; i++) {
+			matrix[i] = [];
+		for(var j = 0; j < y; j++) { 
+			matrix[i][j] = Math.round(Math.random());
+		}
+	 }
+	 return matrix;
+ }
+ 
   function generateGrid(matrix){
     var $table = document.querySelector('#grid');
     $table.innerHTML = '';
@@ -41,13 +53,16 @@ document.addEventListener('DOMContentLoaded', function(){
     // Set a variable Neighbors equal to zero, add to it for each live neighbor found
     var neighbors = 0;  
     // Create a function that traverses each cordinate and calculates the living neighbors of each cell
-    for (var i = x-1; i <= x+1; i++) {
-      if (i < 0 || i > (matrix.length - 1)) {
+   for (var i = x-1; i <= x+1; i++) {
+    //checks the row neighbors outside the scope/table
+					 if (i < 0 || i > (matrix.length - 1)) {
         // skip that row
       } else {
+    // checks the cell neighbors outside the table
         for (var j = y-1; j <= y+1 ; j++){
-          if (j < 0 || j > (matrix[i].length - 1) || (j === y && i === x)){
-            // skip that cell
+    // j === y && i === x checks the live neighbors excluding itself    
+		if (j < 0 || j > (matrix[i].length - 1) || (j === y && i === x)) {
+           // skip that cell
           } else {
             // add to neighbors if value is 1
             if (matrix[i][j] === 1){
@@ -59,7 +74,8 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     return neighbors;
   }
-  
+
+
  function calculateNextState(currentState){
     var nextState = [];
     currentState.forEach(function(currentRow, x){
